@@ -18,7 +18,7 @@ namespace TinyMartAPI.Controllers {
         {
             _productDb = productDb;
         }
-        private static List<VideoProduct> _videos = new List<VideoProduct>();
+    
         // GET: api/video  // all videos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VideoProduct>>> GetAllVideos()
@@ -38,7 +38,7 @@ namespace TinyMartAPI.Controllers {
 
         // POST: api/video
         [HttpPost]
-        public async Task<ActionResult<VideoProduct>> AddVideo(VideoProduct newVideo)
+        public async Task<ActionResult<VideoProduct>> AddVideo([FromBody]VideoProduct newVideo)
         {
             var videos = await _productDb.VideoProducts.ToListAsync();
             if (newVideo.ProductID == 0) // only set if not already provided
@@ -60,7 +60,7 @@ namespace TinyMartAPI.Controllers {
 
         // PUT: api/video/3
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateVideo(int id, VideoProduct updatedVideo)
+        public async Task<ActionResult> UpdateVideo(int id, [FromBody] VideoProduct updatedVideo)
         {
             var video = await _productDb.VideoProducts.FindAsync(id);
             if (video == null) return NotFound();

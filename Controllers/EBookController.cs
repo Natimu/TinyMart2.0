@@ -39,7 +39,7 @@ namespace TinyMartAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<EBook>>AddBooks(EBook newBook)
+        public async Task<ActionResult<EBook>>AddBooks([FromBody]EBook newBook)
         
         {
             var eBooks = await _productDb.EBooks.ToListAsync();
@@ -62,7 +62,7 @@ namespace TinyMartAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateBooks(int id, BookProduct updatedBook)
+        public async Task<ActionResult> UpdateBooks(int id, [FromBody]BookProduct updatedBook)
         {
             var book = await _productDb.EBooks.FindAsync(id);
             if (book == null) return NotFound();

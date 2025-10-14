@@ -3576,11 +3576,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/natnaelawoke/Documents/Desktop files/projects/c#tiny_mart/TinyMartAPI/TinyMartAPI.csproj",
+      "projectUniqueName": "/Users/natnaelawoke/Documents/Desktop files/projects/TinyMart/TinyMartAPI.csproj",
       "projectName": "TinyMartAPI",
-      "projectPath": "/Users/natnaelawoke/Documents/Desktop files/projects/c#tiny_mart/TinyMartAPI/TinyMartAPI.csproj",
+      "projectPath": "/Users/natnaelawoke/Documents/Desktop files/projects/TinyMart/TinyMartAPI.csproj",
       "packagesPath": "/Users/natnaelawoke/.nuget/packages/",
-      "outputPath": "/Users/natnaelawoke/Documents/Desktop files/projects/c#tiny_mart/TinyMartAPI/obj/",
+      "outputPath": "/Users/natnaelawoke/Documents/Desktop files/projects/TinyMart/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/natnaelawoke/.nuget/NuGet/NuGet.Config"

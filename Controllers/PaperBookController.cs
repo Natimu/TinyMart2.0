@@ -37,7 +37,7 @@ namespace TinyMartAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<PaperBook>> AllBooks(PaperBook newBook)
+        public async Task<ActionResult<PaperBook>> AllBooks( [FromBody]PaperBook newBook)
         {
             var books = await _productDb.PaperBooks.ToListAsync();
             if (newBook.ProductID == 0) // only set if not already provided
@@ -58,7 +58,7 @@ namespace TinyMartAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateBooks(int id, BookProduct updatedBook)
+        public async Task<ActionResult> UpdateBooks(int id, [FromBody]BookProduct updatedBook)
         {
             var book = await _productDb.PaperBooks.FindAsync(id);
             if (book == null) return NotFound();

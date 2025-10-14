@@ -37,7 +37,7 @@ namespace TinyMartAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<AudioProduct>> AddAudio(AudioProduct newAudio)
+        public async Task<ActionResult<AudioProduct>> AddAudio([FromBody]AudioProduct newAudio)
         {
             var audios = await _productDb.AudioProducts.ToListAsync();
             if (newAudio.ProductID == 0) // only set if not already provided
@@ -57,7 +57,7 @@ namespace TinyMartAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateAudio(int id, AudioProduct updatedAudio)
+        public async Task<ActionResult> UpdateAudio(int id, [FromBody]AudioProduct updatedAudio)
         {
             var audio = await _productDb.AudioProducts.FindAsync(id);
             if (audio == null) return NotFound();

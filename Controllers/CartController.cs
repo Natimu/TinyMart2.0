@@ -51,7 +51,7 @@ namespace TinyMartAPI.Controllers
                          .Include(c => c.Items)
                          .FirstOrDefaultAsync(c => c.CartId == cartId);
 
-            if (theCart == null) return NotFound("Cart not found.");
+            if (theCart == null) return NotFound(new {message = "Cart not found."});
             var item = theCart.Items.FirstOrDefault(i => i.ProductName == name);
             if (item == null) return NotFound("Item not found.");
             return Ok(item);
@@ -70,7 +70,7 @@ namespace TinyMartAPI.Controllers
         public async Task<ActionResult> AddItemToCart(int cartId, [FromBody] Product item)
         {
             var cart = await _cartDb.Carts.FindAsync(cartId);
-            if (cart == null) return NotFound("Cart not found.");
+            if (cart == null) return NotFound(new {message = "Cart not found."});
             cart.AddItem(item);
             await _cartDb.SaveChangesAsync();
             return Ok(cart);
@@ -81,7 +81,7 @@ namespace TinyMartAPI.Controllers
         {
             var allCarts = await _cartDb.Carts.ToListAsync();
             if (!allCarts.Any())
-                return NotFound("No carts found.");
+                return NotFound(new {message = "No Carts found."});
             _cartDb.Carts.RemoveRange(allCarts);
             await _cartDb.SaveChangesAsync();
 
@@ -92,7 +92,8 @@ namespace TinyMartAPI.Controllers
         public async Task<ActionResult> DeleteCart(int cartId)
         {
             var cart = await _cartDb.Carts.FindAsync(cartId);
-            if (cart == null) return NotFound("Cart do not exist");
+            if (cart == null) return NotFound(new { message = "Cart do not exist." });
+            
             _cartDb.Carts.Remove(cart);
             await _cartDb.SaveChangesAsync();
             return NoContent();
@@ -105,10 +106,10 @@ namespace TinyMartAPI.Controllers
             var cart = await _cartDb.Carts
                 .Include(c => c.Items)
                 .FirstOrDefaultAsync(c => c.CartId == cartId);
-            if (cart == null) return NotFound("Cart not found");
+            if (cart == null) return NotFound(new {message = "Cart not found."});
 
             var removed = cart.RemoveItem(name);
-            if (!removed) return NotFound("Item not found");
+            if (!removed) return NotFound(new {message = "Item not found."});
             await _cartDb.SaveChangesAsync();
             return NoContent();
 

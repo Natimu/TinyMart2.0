@@ -20,13 +20,28 @@ namespace TinyMartAPI.Controllers
         {
             _cartDb = cartDb;
         }
-        private static List<Cart> _myCarts = new List<Cart>();
 
+        // Gives admin option to filter using username
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cart>>> GetAllCarts()
+        public async Task<ActionResult<IEnumerable<Cart>>> GetAllCarts([FromQuery] string? userName)
         {
-            var myCarts = await _cartDb.Carts.ToListAsync();
-            return Ok(myCarts);
+            var query = _cartDb.Carts.Include(c => c.Items).AsQueryable();
+            if (!string.IsNullOrEmpty(userName))
+            {
+                query = query.Where(c => c.Owner.FirstName == userName);
+            }
+            var result = await query.ToListAsync();
+            return Ok(query);
+        }
+
+        // get endpoint to user to filter list of carts using name until i implement user authentication 
+        [HttpGet("{userName}")]
+        public async Task<ActionResult<IEnumerable<Cart>>> GeMyCarts(string userName)
+        {
+            var carts = await _cartDb.Carts.Where(c => c.Owner.FirstName == userName || c.Owner.LastName == userName)
+                                            .Include(c => c.Items)
+                                            .ToListAsync();
+            return Ok(carts);
         }
 
         [HttpGet("{cartId}/items/{name}")]

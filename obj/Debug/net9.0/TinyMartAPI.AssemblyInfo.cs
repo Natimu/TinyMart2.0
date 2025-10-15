@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TinyMartAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+014d3f195f5b6d6cfeb7b2eea54531882982e941")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f820ec29c5599765d09119ef5648d70a06170e7e")]
 [assembly: System.Reflection.AssemblyProductAttribute("TinyMartAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TinyMartAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

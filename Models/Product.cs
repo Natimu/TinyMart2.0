@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 namespace TinyMartAPI.Models
 {
     using prod_id_t = System.Int32;
@@ -7,15 +8,17 @@ namespace TinyMartAPI.Models
     public abstract class Product
     {
         public prod_id_t ProductID { get; private set; } // productID setter is private because outside classes should not have access for it
+        [Required]
+        [StringLength(100)]
         public string ProductName { get; set; }
-        
+
         private double _price;
         public double Price
         {
             get => _price;
             set
             {
-                if (value < 0 || value > 1000)
+                if (value < 0 || value > 10000)
                     throw new ArgumentOutOfRangeException(nameof(Price), "Price must be between 0 and 1,000.");
                 _price = value;
             }
